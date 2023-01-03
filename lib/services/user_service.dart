@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:savings_club/constants/constants.dart';
+import 'package:savings_club/screens/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/User.dart';
@@ -40,7 +41,7 @@ Future<ApiResponse> login(String email, String password) async {
 }
 
 Future<ApiResponse> registration(String name, String email, String password,
-    String pasword_confirmation) async {
+    String passwordConfirmation) async {
   ApiResponse apiResponse = ApiResponse();
   try {
     final response = await http.post(Uri.parse(registerUrl), headers: {
@@ -49,7 +50,7 @@ Future<ApiResponse> registration(String name, String email, String password,
       'name': name,
       'email': email,
       'password': password,
-      'password_confirmation': pasword_confirmation
+      'password_confirmation': passwordConfirmation
     });
 
     switch (response.statusCode) {
@@ -76,7 +77,7 @@ Future<ApiResponse> getUserDetails() async {
   try {
     String token = await getToken();
 
-    final response = await http.post(
+    final response = await http.get(
       Uri.parse(userUrl),
       headers: {'Accept': 'Application/json', 'Authorization': 'Bearer $token'},
       // body: {}
@@ -98,6 +99,13 @@ Future<ApiResponse> getUserDetails() async {
     apiResponse.error = serverError;
   }
   return apiResponse;
+}
+
+//Logout
+Future<bool> logoutUser() async {
+  bool isLoggedOut = await logout();
+
+  return isLoggedOut;
 }
 
 Future<String> getToken() async {

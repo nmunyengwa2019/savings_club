@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:savings_club/constants/constants.dart';
 import 'package:savings_club/constants/inputField.dart';
 import 'package:savings_club/constants/onboardingButton.dart';
 import 'package:savings_club/constants/textButton.dart';
+import 'package:savings_club/models/api_response.dart';
 import 'package:savings_club/screens/HomePage.dart';
 import 'package:savings_club/screens/login.dart';
+import 'package:savings_club/services/user_service.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -30,8 +35,11 @@ class _RegisterState extends State<Register> {
       home: SafeArea(
           child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green[400],
-          title: const Text("Register"),
+          backgroundColor: bgAppbar,
+          title: Text(
+            "Register",
+            style: GoogleFonts.acme(fontWeight: FontWeight.bold, fontSize: 25),
+          ),
           centerTitle: true,
         ),
         body: Form(
@@ -39,27 +47,33 @@ class _RegisterState extends State<Register> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               children: [
-                inputField(_nameController, TextInputType.text, "Name"),
+                inputField(_nameController, TextInputType.text, "Name", false),
                 const SizedBox(
                   height: 4,
                 ),
-                inputField(_surnameController, TextInputType.text, "Surname"),
+                inputField(
+                    _surnameController, TextInputType.text, "Surname", false),
                 const SizedBox(
                   height: 4,
                 ),
                 inputField(_emailController, TextInputType.emailAddress,
-                    "Email address"),
+                    "Email address", false),
                 const SizedBox(
                   height: 4,
                 ),
-                inputField(_passwordController, TextInputType.text, "Password"),
+                inputField(
+                    _passwordController, TextInputType.text, "Password", true),
                 const SizedBox(
                   height: 4,
                 ),
                 inputField(_passwordConfirmationController, TextInputType.text,
-                    "Confirm Password"),
+                    "Confirm Password", true),
                 const SizedBox(height: 8),
-                txtButton("Register", () {}),
+                txtButton("Register", () {
+                  if (formKey.currentState!.validate()) {
+                    _registerUser();
+                  } else {}
+                }),
                 onboardingButton(
                     "Already have an account? ", "Login", navigateToLogin),
               ],
@@ -72,5 +86,15 @@ class _RegisterState extends State<Register> {
     return await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => const Login()),
         (Route<dynamic> route) => false);
+  }
+
+  Future<ApiResponse> _registerUser() async {
+    ApiResponse response = await registration(
+        _nameController.text,
+        _emailController.text,
+        _passwordController.text,
+        _passwordConfirmationController.text);
+    navigateToLogin();
+    return response;
   }
 }

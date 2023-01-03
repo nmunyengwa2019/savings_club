@@ -1,5 +1,6 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 Container onboardingButton(
@@ -15,7 +16,7 @@ Container onboardingButton(
           onTap: () => nav(),
           child: Text(
             txt2,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: GoogleFonts.acme(fontWeight: FontWeight.bold, fontSize: 15),
           ),
         )
       ],

@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-TextFormField inputField(
-    TextEditingController contr, TextInputType inputType, String labelName) {
+TextFormField inputField(TextEditingController contr, TextInputType inputType,
+    String labelName, bool isPass) {
   return TextFormField(
     controller: contr,
     keyboardType: inputType,
+    obscureText: isPass,
     decoration: InputDecoration(
         focusColor: Colors.red,
         labelText: labelName,

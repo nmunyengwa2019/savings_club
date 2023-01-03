@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:savings_club/screens/HomePage.dart';
 import 'package:savings_club/screens/login.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: const Login(),
+      home: const HomePage(),
     );
   }
 }

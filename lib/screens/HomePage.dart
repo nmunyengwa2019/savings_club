@@ -1,6 +1,10 @@
-import 'package:flutter/cupertino.dart';
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:savings_club/constants/constants.dart';
+import 'package:savings_club/constants/menuIcon.dart';
+import 'package:savings_club/screens/login.dart';
+import 'package:savings_club/services/user_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,118 +27,61 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Colors.grey[200],
-          appBar: AppBar(
-            backgroundColor: Colors.deepPurpleAccent,
-            title: Text(
-              "E-sure",
-              style: GoogleFonts.bebasNeue(
-                  fontWeight: FontWeight.bold, fontSize: 25),
-            ),
-            centerTitle: true,
+        backgroundColor: Colors.grey[200],
+        appBar: AppBar(
+          backgroundColor: bgAppbar,
+          title: Text(
+            "MULA BOX",
+            style: GoogleFonts.acme(fontWeight: FontWeight.bold, fontSize: 18),
           ),
-          body: SingleChildScrollView(
-            child: Center(
-              child: Column(
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+                onPressed: navigateToLogin,
+                icon: const Icon(Icons.logout_outlined))
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Row(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Column(
                 children: [
-                  //Welcome message
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    child: Text(
-                      'Welcome to iSave. Save your money ',
-                      style: GoogleFonts.bebasNeue(fontSize: 20),
-                    ),
+                  menuIcon(),
+                  SizedBox(
+                    height: 6,
                   ),
-                  //email field
-                  Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.white),
-                          color: Colors.white),
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: const TextField(
-                        decoration: InputDecoration(
-                            labelText: "Email",
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                            hintText: "Email"),
-                      ),
-                    ),
-                  ),
-                  // SizedBox(height: 8,),
-                  //password field
-                  Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: const TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: "Password",
-                          border: InputBorder.none,
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          hintText: "Password",
-                        ),
-                      ),
-                    ),
-                  ),
-                  // SizedBox(height: 8,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 18),
-                      decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.deepPurpleAccent)),
-                      child: Center(
-                          child: Text(
-                        "Submit",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      )),
-                    ),
-                  ),
-
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
-                    child: Row(
-                      children: [
-                        Text("Don\'t have an account? "),
-                        InkWell(
-                          onTap: () {
-                            print("redirect to registration page");
-                          },
-                          child: Container(
-                              child: Text(
-                            "Register",
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.deepPurpleAccent,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        )
-                      ],
-                    ),
-                  ),
-
-                  //Submit button
+                  // menuIcon()
                 ],
               ),
-            ),
-          )),
+              Column(
+                children: [
+                  // menuIcon(),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  menuIcon(),
+                ],
+              ),
+              Column(
+                children: [
+                  // menuIcon(),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  menuIcon(),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
+  }
+
+  Future<Navigator> navigateToLogin() async {
+    return await Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => Login()),
+        (Route<dynamic> route) => false);
   }
 }
