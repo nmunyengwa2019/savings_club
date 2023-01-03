@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:savings_club/constants/inputField.dart';
 import 'package:savings_club/constants/onboardingButton.dart';
+import 'package:savings_club/constants/textButton.dart';
 import 'package:savings_club/screens/HomePage.dart';
 import 'package:savings_club/screens/login.dart';
 
@@ -58,6 +59,7 @@ class _RegisterState extends State<Register> {
                 inputField(_passwordConfirmationController, TextInputType.text,
                     "Confirm Password"),
                 const SizedBox(height: 8),
+                txtButton("Register", () {}),
                 onboardingButton(
                     "Already have an account? ", "Login", navigateToLogin),
               ],
