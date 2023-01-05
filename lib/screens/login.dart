@@ -48,12 +48,12 @@ class _LoginState extends State<Login> {
     });
 
     if (response.error == null) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Login Successful"),
       ));
       navToHomePage();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Something went wrong!"),
       ));
     }
@@ -118,11 +118,8 @@ class _LoginState extends State<Login> {
               ),
               txtButton("Login", () {
                 if (formKey.currentState!.validate()) {
-                  setState(() {
-                    loading = true;
-                  });
+                  // loading ? progressIndicatorRoute() : false;
                   _loginUser();
-
                   setState(() {
                     loading = false;
                   });

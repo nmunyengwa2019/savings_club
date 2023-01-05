@@ -7,6 +7,7 @@ TextFormField inputField(TextEditingController contr, TextInputType inputType,
     controller: contr,
     keyboardType: inputType,
     obscureText: isPass,
+    validator: (value) => value!.length < 1 ? "Field is required" : null,
     decoration: InputDecoration(
         focusColor: Colors.red,
         labelText: labelName,
