@@ -44,7 +44,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
-            onTap: null,
             backgroundColor: bgAppbar,
             elevation: 4,
             unselectedItemColor: Color.fromARGB(255, 200, 200, 200),
@@ -61,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(Icons.person_pin), label: "My Profile"),
             ]),
         body: Container(
-          padding: EdgeInsets.symmetric(vertical: 18, horizontal: 15),
+          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 15),
           child: GridView.count(
               crossAxisCount: 3,
               crossAxisSpacing: 4,
@@ -70,7 +69,6 @@ class _HomePageState extends State<HomePage> {
                   choices.length,
                   (index) => SelectCard(
                         choice: choices[index],
-                        pageRoute: navigateToLogin,
                       ))),
         ),
       ),
@@ -83,26 +81,43 @@ class _HomePageState extends State<HomePage> {
         (Route<dynamic> route) => false);
   }
 
-  Future<Navigator> payment() async {
-    return await Navigator.of(context).pushAndRemoveUntil(
+  paymentPage() {
+    Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => const Login()),
-        (Route<dynamic> route) => false);
+        (route) => false);
   }
+
+  List<Choice> choices = <Choice>[
+    Choice(icon: Icons.paid_rounded, description: "Deposit", navChoice: 1),
+    Choice(
+        icon: Icons.account_balance_outlined,
+        description: "Take Loan",
+        navChoice: 2),
+    Choice(icon: Icons.payment, description: "Claim", navChoice: 3),
+    Choice(
+        icon: Icons.account_balance_wallet_sharp,
+        description: "Sum Assured",
+        navChoice: 4),
+    Choice(icon: Icons.event, description: "Payment Schedule", navChoice: 5),
+    Choice(
+        icon: Icons.history_outlined,
+        description: "Payment History",
+        navChoice: 6),
+    Choice(
+        icon: Icons.how_to_vote_outlined,
+        description: "Voting Requests",
+        navChoice: 7),
+    Choice(
+        icon: Icons.manage_accounts,
+        description: "Update Profile",
+        navChoice: 8),
+  ];
 }
 
 class Choice {
-  Choice({required this.icon, required this.description});
+  Choice(
+      {required this.icon, required this.description, required this.navChoice});
   IconData icon;
   String description;
+  int navChoice;
 }
-
-List<Choice> choices = <Choice>[
-  Choice(icon: Icons.paid_rounded, description: "Deposit"),
-  Choice(icon: Icons.account_balance_outlined, description: "Take Loan"),
-  Choice(icon: Icons.payment, description: "Claim"),
-  Choice(icon: Icons.account_balance_wallet_sharp, description: "Sum Assured"),
-  Choice(icon: Icons.event, description: "Payment Schedule"),
-  Choice(icon: Icons.history_outlined, description: "Payment History"),
-  Choice(icon: Icons.how_to_vote_outlined, description: "Voting Requests"),
-  Choice(icon: Icons.manage_accounts, description: "Update Profile"),
-];
