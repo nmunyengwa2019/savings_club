@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:savings_club/screens/HomePage.dart';
+import 'package:savings_club/screens/bankTransfer.dart';
+import 'package:savings_club/screens/ecocash.dart';
 import 'package:savings_club/screens/login.dart';
 import 'package:savings_club/screens/payments.dart';
+import 'package:savings_club/screens/paypal.dart';
 import 'package:savings_club/screens/register.dart';
 
 void main() {
@@ -20,7 +23,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/payment': (context) => const Payments(),
-        '/register': (context) => const Register()
+        '/register': (context) => const Register(),
+        '/paypal': (context) => const PayPal(),
+        '/ecocash': (context) => const Ecocash(),
+        '/bankTransfer': (context) => const BankTransfer(),
       },
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
