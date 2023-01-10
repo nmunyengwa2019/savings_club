@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:savings_club/constants/constants.dart';
 import 'package:savings_club/constants/onboardingButton.dart';
 import 'package:savings_club/models/api_response.dart';
@@ -16,7 +17,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool loading = false;
+  bool isLoading = false;
 
   CircularProgressIndicator _LoadingProgress() {
     return const CircularProgressIndicator(
@@ -37,34 +38,37 @@ class _LoginState extends State<Login> {
   }
 
   Future<void> _loginUser() async {
-    // setState(() {
-    //   loading = true;
-    // });
+    setState(() {
+      isLoading = true;
+    });
 
     ApiResponse response =
         await login(_emailController.text, _passwordController.text);
-    setState(() {
-      loading = false;
-    });
+    // setState(() {
+    //   loading = false;
+    // });
 
     if (response.error == null) {
+      navToHomePage();
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Login Successful"),
       ));
-      navToHomePage();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Something went wrong!"),
       ));
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 
-  CircularProgressIndicator progressIndicatorRoute() {
-    return const CircularProgressIndicator(
-      color: Colors.white,
-      backgroundColor: Colors.grey,
-    );
-  }
+  loadingCircle() => const LoadingIndicator(
+        indicatorType: Indicator.ballScaleMultiple,
+        backgroundColor: Colors.white,
+        colors: isLoadingColors,
+        strokeWidth: 4.0,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -116,20 +120,19 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 8,
               ),
-              txtButton("Login", () {
+              txtButton(isLoading ? "Loading..." : "Login", () {
                 if (formKey.currentState!.validate()) {
-                  // loading ? progressIndicatorRoute() : false;
                   _loginUser();
-                  setState(() {
-                    loading = false;
-                  });
+                  // isLoading ? loadingCircle() : navToHomePage();
                 }
               }),
               //Don't have an account button
               InkWell(
                 onDoubleTap: () {},
-                child: onboardingButton(
-                    "Don't have an account? ", "Register", navToRegister),
+                child: isLoading
+                    ? loadingCircle()
+                    : onboardingButton(
+                        "Don't have an account? ", "Register", navToRegister),
               ),
             ],
           )),
@@ -160,3 +163,13 @@ class _LoginState extends State<Login> {
         (Route<dynamic> route) => false);
   }
 }
+
+const List<Color> isLoadingColors = const [
+  // Colors.red,
+  Colors.orange,
+  // Colors.yellow,
+  Color.fromARGB(255, 58, 112, 60),
+  Color.fromARGB(255, 85, 144, 192),
+  Color.fromARGB(255, 15, 32, 126),
+  Color.fromARGB(255, 205, 42, 234),
+];

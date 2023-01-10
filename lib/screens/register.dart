@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:savings_club/constants/constants.dart';
 import 'package:savings_club/constants/inputField.dart';
 import 'package:savings_club/constants/onboardingButton.dart';
@@ -27,7 +28,13 @@ class _RegisterState extends State<Register> {
       TextEditingController();
   // TextEditingController _nameController = TextEditingController();
   // TextEditingController _nameController = TextEditingController();
-
+  bool isLoading = false;
+  loadingCircle() => const LoadingIndicator(
+        indicatorType: Indicator.ballScaleMultiple,
+        backgroundColor: Colors.white,
+        colors: isLoadingColors,
+        strokeWidth: 4.0,
+      );
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -69,13 +76,15 @@ class _RegisterState extends State<Register> {
                 inputField(_passwordConfirmationController, TextInputType.text,
                     "Confirm Password", true),
                 const SizedBox(height: 8),
-                txtButton("Register", () {
+                txtButton(isLoading ? "Registering..." : "Register", () {
                   if (formKey.currentState!.validate()) {
                     _registerUser();
                   } else {}
                 }),
-                onboardingButton(
-                    "Already have an account? ", "Login", navigateToLogin),
+                isLoading
+                    ? loadingCircle()
+                    : onboardingButton(
+                        "Already have an account? ", "Login", navigateToLogin),
               ],
             )),
       )),
@@ -89,12 +98,28 @@ class _RegisterState extends State<Register> {
   }
 
   Future<ApiResponse> _registerUser() async {
+    setState(() {
+      isLoading = true;
+    });
     ApiResponse response = await registration(
         _nameController.text,
         _emailController.text,
         _passwordController.text,
         _passwordConfirmationController.text);
+    setState(() {
+      isLoading = false;
+    });
     navigateToLogin();
     return response;
   }
 }
+
+const List<Color> isLoadingColors = const [
+  // Colors.red,
+  Colors.orange,
+  // Colors.yellow,
+  Color.fromARGB(255, 58, 112, 60),
+  Color.fromARGB(255, 85, 144, 192),
+  Color.fromARGB(255, 15, 32, 126),
+  Color.fromARGB(255, 205, 42, 234),
+];

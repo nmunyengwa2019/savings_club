@@ -32,9 +32,9 @@ class _BankTransferState extends State<BankTransfer> {
           ),
           bottomNavigationBar: CurvedNavigationBar(
             height: 60,
-            buttonBackgroundColor: Color.fromARGB(255, 178, 214, 243),
+            buttonBackgroundColor: const Color.fromARGB(255, 178, 214, 243),
             animationCurve: Curves.easeOutQuad,
-            color: Color.fromARGB(255, 251, 241, 241),
+            color: const Color.fromARGB(255, 251, 241, 241),
             backgroundColor: bgAppbar,
             key: _bottomNavKey,
             items: const <Widget>[
