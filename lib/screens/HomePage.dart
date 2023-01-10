@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:savings_club/constants/constants.dart';
@@ -24,6 +25,10 @@ class _HomePageState extends State<HomePage> {
     passwordController.dispose();
   }
 
+  final GlobalKey<CurvedNavigationBarState> _bottomNavKey = GlobalKey();
+  List<Widget> pages = [];
+  int _page = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -43,22 +48,34 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.logout_rounded))
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: bgAppbar,
-            elevation: 4,
-            unselectedItemColor: Color.fromARGB(255, 200, 200, 200),
-            selectedItemColor: Color.fromARGB(255, 247, 246, 248),
-            selectedLabelStyle: GoogleFonts.acme(
-              fontSize: 16,
+        bottomNavigationBar: CurvedNavigationBar(
+          height: 60,
+          buttonBackgroundColor: Color.fromARGB(255, 178, 214, 243),
+          animationCurve: Curves.easeOutQuad,
+          color: Color.fromARGB(255, 251, 241, 241),
+          backgroundColor: bgAppbar,
+          key: _bottomNavKey,
+          items: const <Widget>[
+            Icon(
+              Icons.paid_rounded,
+              size: 30,
             ),
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.paid_rounded), label: "Deposit"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.groups_rounded), label: "Members"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person_pin), label: "My Profile"),
-            ]),
+            Icon(
+              Icons.groups_rounded,
+              size: 30,
+            ),
+            Icon(
+              Icons.person_pin,
+              size: 30,
+            ),
+          ],
+          onTap: (index) {
+            setState(() {
+              _page = index;
+              print(index);
+            });
+          },
+        ),
         body: Container(
           padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 15),
           child: GridView.count(
