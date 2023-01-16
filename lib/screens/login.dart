@@ -19,13 +19,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool isLoading = false;
 
-  CircularProgressIndicator _LoadingProgress() {
-    return const CircularProgressIndicator(
-      backgroundColor: Colors.amber,
-      color: Colors.white,
-    );
-  }
-
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();

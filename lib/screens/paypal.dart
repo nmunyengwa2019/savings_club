@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:savings_club/constants/backArrow.dart';
 import 'package:savings_club/constants/bottomNav.dart';
 import 'package:savings_club/constants/constants.dart';
 
@@ -50,6 +51,7 @@ class _PayPalState extends State<PayPal> {
               },
             ),
             appBar: AppBar(
+              leading: backArrow(context),
               backgroundColor: bgAppbar,
               centerTitle: true,
               title: Text(

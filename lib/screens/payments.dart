@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // ignore: unnecessary_import, implementation_imports
 import 'package:flutter/src/foundation/key.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:savings_club/constants/backArrow.dart';
 import 'package:savings_club/constants/constants.dart';
 
 class Payments extends StatefulWidget {
@@ -23,6 +24,7 @@ class _PaymentsState extends State<Payments> {
         child: Scaffold(
           backgroundColor: Colors.grey[300],
           appBar: AppBar(
+            leading: backArrow(context),
             centerTitle: true,
             backgroundColor: bgAppbar,
             title: Text(
