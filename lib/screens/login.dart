@@ -76,11 +76,15 @@ class _LoginState extends State<Login> {
         centerTitle: true,
       ),
       body: Form(
+
           key: formKey,
           child: ListView(
+
             padding: const EdgeInsets.all(8),
             children: [
+
               TextFormField(
+
                   // key: formKey,
                   keyboardType: TextInputType.emailAddress,
                   controller: _emailController,

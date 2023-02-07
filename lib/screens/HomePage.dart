@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
     Choice(icon: Icons.paid_rounded, description: "Deposit", navChoice: 1),
     Choice(
         icon: Icons.account_balance_outlined,
-        description: "Take Loan",
+        description: "Request Money",
         navChoice: 2),
     Choice(icon: Icons.payment, description: "Claim", navChoice: 3),
     Choice(
