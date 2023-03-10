@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 TextFormField sampleField(
     TextInputType keyboard, TextEditingController controller, String inputLabel,
-    {bool isPass = true}) {
+    {bool isPass = false}) {
   return TextFormField(
       // key: formKey,
       keyboardType: keyboard,

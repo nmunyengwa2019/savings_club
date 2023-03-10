@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
   }
 
   loadingCircle() => const LoadingIndicator(
-        indicatorType: Indicator.ballScaleMultiple,
+        indicatorType: Indicator.ballClipRotateMultiple,
         backgroundColor: Colors.white,
         colors: isLoadingColors,
         strokeWidth: 4.0,
@@ -163,7 +163,7 @@ class _LoginState extends State<Login> {
 
 const List<Color> isLoadingColors = const [
   // Colors.red,
-  Colors.orange,
+  // Colors.orange,
   // Colors.yellow,
   Color.fromARGB(255, 58, 112, 60),
   Color.fromARGB(255, 85, 144, 192),

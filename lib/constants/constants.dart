@@ -15,7 +15,9 @@ const unauthorized = "unauthorized";
 
 //Colors
 const bgWhite = Colors.white;
+const textColor= Color.fromARGB(255, 61, 33, 198);
 const bgColor = Color.fromARGB(255, 31, 85, 117);
+const bgBlueColor = Color.fromARGB(255, 60, 31, 142);
 const bgAppbar = Color.fromARGB(255, 14, 101, 151);
 const submitColor = Color.fromARGB(255, 3, 31, 125);
-double groupAccountBalance = 0;
+double groupAccountBalance = 0.00;

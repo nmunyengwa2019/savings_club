@@ -6,6 +6,7 @@ import 'package:savings_club/constants/inputField.dart';
 import 'package:savings_club/constants/onboardingButton.dart';
 import 'package:savings_club/constants/textButton.dart';
 import 'package:savings_club/models/api_response.dart';
+import 'package:savings_club/models/phone_number_validation.dart';
 import 'package:savings_club/screens/HomePage.dart';
 import 'package:savings_club/screens/login.dart';
 import 'package:savings_club/services/user_service.dart';
@@ -26,11 +27,11 @@ class _RegisterState extends State<Register> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordConfirmationController =
       TextEditingController();
-  // TextEditingController _nameController = TextEditingController();
+ final TextEditingController _phoneController = TextEditingController();
   // TextEditingController _nameController = TextEditingController();
   bool isLoading = false;
   loadingCircle() => const LoadingIndicator(
-        indicatorType: Indicator.ballScaleMultiple,
+        indicatorType: Indicator.ballClipRotateMultiple,
         backgroundColor: Colors.white,
         colors: isLoadingColors,
         strokeWidth: 4.0,
@@ -63,6 +64,11 @@ class _RegisterState extends State<Register> {
                 const SizedBox(
                   height: 4,
                 ),
+                inputField(
+                    _phoneController, TextInputType.text, "Phone Number", false),
+                const SizedBox(
+                  height: 4,
+                ),
                 inputField(_emailController, TextInputType.emailAddress,
                     "Email address", false),
                 const SizedBox(
@@ -77,9 +83,13 @@ class _RegisterState extends State<Register> {
                     "Confirm Password", true),
                 const SizedBox(height: 8),
                 txtButton(isLoading ? "Registering..." : "Register", () {
+                  validateMobile(_phoneController.text);
+
                   if (formKey.currentState!.validate()) {
                     _registerUser();
-                  } else {}
+                  } else {
+
+                  }
                 }),
                 isLoading
                     ? loadingCircle()

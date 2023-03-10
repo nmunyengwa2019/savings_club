@@ -35,6 +35,8 @@ class MyApp extends StatelessWidget {
         '/requestMoney': (context) => const RequestMoney(),
       },
       theme: ThemeData(
+        fontFamily: 'AvenirRoman',
+
         primarySwatch: Colors.deepPurple,
       ),
       home: const LandingPage(),

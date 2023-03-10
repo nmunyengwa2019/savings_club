@@ -6,6 +6,8 @@ import 'package:savings_club/constants/constants.dart';
 import 'package:savings_club/constants/submitButton.dart';
 import 'package:savings_club/constants/text_form.dart';
 
+import '../constants/show_error_dialogue.dart';
+
 class Ecocash extends StatefulWidget {
   const Ecocash({Key? key}) : super(key: key);
 
@@ -71,7 +73,7 @@ class _EcocashState extends State<Ecocash> {
                       height: 8,
                     ),
                     sampleField(TextInputType.phone, _sourceNumberController,
-                        "Your mobile number"),
+                        "Source number e.g 077222727"),
                     const SizedBox(
                       height: 8,
                     ),
@@ -92,7 +94,17 @@ class _EcocashState extends State<Ecocash> {
                     ),
                     InkWell(
                       onTap: () {
+                        if(_sourceNumberController.text.length<10){
+                         return showErrorMessage(context,"Phone Number","Invalid phone number");
+                        }
+                        else if(double.parse(_amountController.text)<20.00){
+                          return showErrorMessage(context, "Amount Error", "MIn amount is ZWL20.00");
+                        }
                         print("object");
+                        _sourceNumberController.dispose();
+                        _amountController.dispose();
+                        _destinationNumberController.dispose();
+                        _referenceController.dispose();
                       },
                       child: submitButton("Pay", phoneWidth),
                     ),
@@ -118,5 +130,6 @@ class _EcocashState extends State<Ecocash> {
 }
 
 ecocashPayment() {
+
   print("");
 }

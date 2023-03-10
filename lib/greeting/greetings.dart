@@ -4,10 +4,10 @@ import 'package:intl/intl.dart';
 
 String greeting(){
 
-  String morning = "Good morning";
-  String afternoon = "Good afternoon";
-  String  evening = "Good evening";
-  String night = "Good night";
+  String morning = "Good Morning";
+  String afternoon = "Good Afternoon";
+  String  evening = "Good Evening";
+  String night = "Good Night";
 
 
   DateTime dateTime = DateTime.now();

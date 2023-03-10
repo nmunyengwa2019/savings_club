@@ -25,18 +25,27 @@ class LandingPage extends StatelessWidget {
 
                 borderRadius: BorderRadius.only(bottomRight: Radius.circular(80),bottomLeft: Radius.circular(80)),
                 child:Container(
-                  //
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        bgWhite,
+                        submitColor,
+                      ],
+                    )
+                  ),
                   padding: EdgeInsets.symmetric(vertical: 100),
                     height: MediaQuery.of(context).size.height/2,
 
                     width: MediaQuery.of(context).size.width,
-                    color:  bgColor,
+                    // color:  bgColor,
 
                         child: Column(
 
                           children: [
-                            Text(greeting(),style: GoogleFonts.acme(fontSize: 30,color: bgWhite),),
-                            Text("Welcome to $appName",style: GoogleFonts.acme(fontSize: 30,color: bgWhite),)
+                            Text(greeting(),style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: textColor),),
+                            Text("Welcome to $appName",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: textColor),)
                           ],
                         )),
               ),
@@ -71,9 +80,9 @@ class LandingPage extends StatelessWidget {
                       topRight: Radius.circular(50.0),
                     ),
 
-                child: Image.network('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG1vbmV5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',width: MediaQuery.of(context).size.width*0.6,
-                    fit:BoxFit.fill,
-                ),
+                // child: Image.network('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG1vbmV5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',width: MediaQuery.of(context).size.width*0.6,
+                //     fit:BoxFit.fill,
+                // ),
               ))
             ],
           ),
